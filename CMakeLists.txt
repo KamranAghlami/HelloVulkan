@@ -71,5 +71,5 @@ foreach(SHADER ${SHADERS})
   VERBATIM)
 endforeach()
 
-add_custom_target(${PROJECT_NAME}_Shaders COMMAND DEPENDS ${BINARY_SHADERS})
-add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_Shaders)
+add_custom_target(${PROJECT_NAME}_Shaders ALL COMMAND DEPENDS ${BINARY_SHADERS})
+add_dependencies(${PROJECT_NAME}_Shaders ${PROJECT_NAME})
