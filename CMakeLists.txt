@@ -8,9 +8,6 @@ file(GLOB_RECURSE SOURCES "${CMAKE_SOURCE_DIR}/src/*.cpp")
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-include(cmake/config.cmake)
-configure_file(src/${PROJECT_NAME}_config.h.in ${PROJECT_NAME}_config.h)
-
 target_include_directories(${PROJECT_NAME}
   PRIVATE
     $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src>
@@ -51,7 +48,7 @@ FetchContent_MakeAvailable(glm)
 target_link_libraries(${PROJECT_NAME} PRIVATE glm)
 
 set(SHADER_SOURCE_DIRECTORY ${CMAKE_SOURCE_DIR}/src/shaders)
-set(SHADER_BINARY_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME}_Shaders)
+set(SHADER_BINARY_DIRECTORY ${CMAKE_BINARY_DIR}/shaders)
 
 if(NOT EXISTS ${SHADER_BINARY_DIRECTORY})
 file(MAKE_DIRECTORY ${SHADER_BINARY_DIRECTORY})
@@ -65,9 +62,12 @@ foreach(SHADER ${SHADERS})
   add_custom_command(
   OUTPUT ${SHADER_BINARY_DIRECTORY}/${BINARY_SHADER_FILE_NAME}
   COMMAND ${Vulkan_GLSLC_EXECUTABLE} ${SHADER} -o ${SHADER_BINARY_DIRECTORY}/${BINARY_SHADER_FILE_NAME}
-  COMMAND ${CMAKE_COMMAND} -E copy ${SHADER_BINARY_DIRECTORY}/${BINARY_SHADER_FILE_NAME} $<TARGET_FILE_DIR:${PROJECT_NAME}>/
   DEPENDS ${SHADER}
-  COMMENT "Compiling: ${SHADER}"
+  COMMENT "Compiling shader: ${SHADER_FILE_NAME}"
   VERBATIM)
 endforeach()
 add_custom_target(${PROJECT_NAME}_Shaders COMMAND DEPENDS ${BINARY_SHADERS})
+add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_Shaders)
+
+include(cmake/config.cmake)
+configure_file(src/${PROJECT_NAME}_config.h.in ${PROJECT_NAME}_config.h)

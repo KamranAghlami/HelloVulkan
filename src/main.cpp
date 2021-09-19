@@ -593,8 +593,8 @@ private:
 
     void create_graphics_pipeline()
     {
-        auto vertex_shader_code = read_file("shader.vert.spv");
-        auto fragment_shader_code = read_file("shader.frag.spv");
+        auto vertex_shader_code = read_file(SHADER_BINARY_DIRECTORY "/shader.vert.spv");
+        auto fragment_shader_code = read_file(SHADER_BINARY_DIRECTORY "/shader.frag.spv");
 
         VkShaderModule vertex_shader_module = create_shader_module(vertex_shader_code);
         VkShaderModule fragment_shader_module = create_shader_module(fragment_shader_code);
