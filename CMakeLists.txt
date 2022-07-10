@@ -24,7 +24,7 @@ set(SPDLOG_INSTALL OFF CACHE BOOL "disable installing of spdlog.")
 FetchContent_MakeAvailable(spdlog)
 target_link_libraries(${PROJECT_NAME} PRIVATE spdlog)
 
-find_package(Vulkan)
+find_package(Vulkan REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE Vulkan::Vulkan)
 
 FetchContent_Declare(
