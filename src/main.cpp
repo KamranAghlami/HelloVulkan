@@ -149,9 +149,11 @@ private:
         else
             create_info.enabledLayerCount = 0;
 
+#if 0
         create_info.flags = VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR;
         extensions.push_back(VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME);
         extensions.push_back(VK_KHR_PORTABILITY_ENUMERATION_EXTENSION_NAME);
+#endif
 
         check_instance_extensions(extensions);
         create_info.enabledExtensionCount = static_cast<uint32_t>(extensions.size());
@@ -948,7 +950,9 @@ private:
 
     const std::vector<const char *> m_device_extensions = {
         VK_KHR_SWAPCHAIN_EXTENSION_NAME,
+#if 0
         "VK_KHR_portability_subset",
+#endif
     };
 
     static VKAPI_ATTR VkBool32 VKAPI_CALL debug_callback(
