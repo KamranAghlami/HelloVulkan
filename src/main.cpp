@@ -1061,7 +1061,7 @@ int main()
     spdlog::set_level(spdlog::level::trace);
     spdlog::set_pattern("%^[%T] %v%$");
 
-    SPDLOG_INFO("HelloVukan v{}.{}.{}", PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR, PROJECT_VERSION_PATCH);
+    SPDLOG_INFO("HelloVulkan v{}.{}.{}", PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR, PROJECT_VERSION_PATCH);
 
     HelloTriangleApplication app;
 
